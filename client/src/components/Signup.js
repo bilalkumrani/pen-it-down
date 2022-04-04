@@ -62,7 +62,7 @@ export default function SignUp() {
     },
     onSubmit: (values) => {
       axios
-        .post("/register", {
+        .post("http://localhost:5000/register", {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
