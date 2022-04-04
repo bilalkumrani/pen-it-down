@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const connectDB = require("./mondbConnection");
 const { User } = require("./databaseSchema");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
 const joi = require("@hapi/joi");
+
+const PORT = 5000;
 
 connectDB();
 
@@ -22,6 +25,8 @@ app.post("/register", (req, res) => {
     if (doc) res.send("User already exists");
     if (!doc) {
       const schema = joi.object({
+        firstname: joi.string().required(),
+        lastname: joi.string().required(),
         email: joi.string().trim().required().email(),
         password: joi.string().min(8).required(),
       });
@@ -32,7 +37,11 @@ app.post("/register", (req, res) => {
       } else {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const email = result.value.email;
+        const firstname = result.value.firstname;
+        const lastname = result.value.lastname;
         const newUser = new User({
+          firstname: firstname,
+          lastname: lastname,
           email: email,
           password: hashedPassword,
         });
@@ -47,6 +56,6 @@ app.post("/login", (req, res) => {
   res.send("this is nice");
 });
 
-app.listen(8080, () => {
-  console.log("server is runing...");
+app.listen(PORT, () => {
+  console.log(`server is runing on port ${PORT}...`);
 });
