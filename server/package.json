@@ -12,5 +12,6 @@
     "start": "nodemon server.js",
     "client": "cd ../client && npm start",
     "dev" : "concurrently \"nodemon server.js\" \"npm run client\""
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
