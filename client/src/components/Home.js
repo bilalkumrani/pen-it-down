@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import NavBar from "./NavBar";
+import { useFormik } from "formik";
 
 const Home = () => {
   return (
@@ -18,6 +19,9 @@ const Home = () => {
             alt="The house from the offer."
             src="https://picsum.photos/500/300"
           />
+          <Box>
+            <textarea />
+          </Box>
         </Grid>
       </Grid>
     </div>
