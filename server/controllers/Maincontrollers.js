@@ -51,7 +51,7 @@ exports.login = (req, res) => {
       name: user.firstname,
     };
 
-    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+    const token = jwt.sign(payload, "secret_key", {
       expiresIn: "1d",
     });
 
@@ -63,10 +63,11 @@ exports.login = (req, res) => {
 };
 
 exports.protected = (req, res) => {
+  const { _id, firstname, lastname } = req.user;
   res.status(200).json({
     user: {
-      id: req.user.id,
-      Name: req.user.firstname,
+      id: _id,
+      Name: `${firstname} ${lastname}`,
     },
   });
 };
